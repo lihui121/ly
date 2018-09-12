@@ -1,0 +1,28 @@
+server:
+  port: 8081
+mybatis:
+  type-aliases-package: com.leyou.entity
+  mapper-locations: classpath:mapper/*.xml
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.0.3:1521:orcl
+    username: TEST
+    password: 123456
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 10
+  application:
+    name: item-service
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10076/eureka
+    register-with-eureka: true
+    fetch-registry: true
